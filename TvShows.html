@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+<head>
+	<title>TV SHOWS</title>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<link rel="stylesheet" href="tvshows.css" />
+</head>
+<body>
+<body>
+	<section id="banner">
+	<div class="content">
+		<h1>TV SHOW EXPLORER</h1>
+		<p>A web app to browse through episodes of Season 1 of different English TV Shows</p>
+	<div class="actions">
+	<div ng-app="tvShowsApp" ng-controller="tvShowsCtrl">
+		<table width="100%">
+			<tr>
+				<td>
+					<form novalidate>
+						<strong style = "color: #189396">TV Show Name:</strong> <input ng-model="tvShowName">
+						<button class= "button scrolly" ng-click="updateTvShows()">Search</button>
+					</form>
+					<br>
+					<div ng-repeat="x in allEpisodesData">
+						<div>
+							<table>
+								<tr>
+									<td ng-style="setColor(x)"><img ng-src="{{ x.Poster }}" width="400" height="300"></td>
+									<td ng-style="setColor(x)">
+										<div>
+											<h4>Episode # {{ x.Episode }}<br>
+											Title: {{ x.Title }}<br>
+											Released: {{ x.Released | dateFormat}}<br>
+											Rating: {{ x.imdbRating }}<br></h4>
+											<strong style = "color:#20A0A4">Plot</strong>: {{ x.Plot }}<br><br>
+											
+											<a id="deleteEpisode{{ x.Episode}}" href ng-click="deleteEpisode(x.Episode)"><button class= "button scrolly" >Remove</button><br><br></a>
+										</div>
+									</td>
+								</tr>
+							</table>
+						</div>
+					</div>
+					<div>
+						<h4 style="color:#23D3D7; font-size:200%; text-align:center" >Average IMDB rating: {{calculateAverage(allEpisodesData)}}</h4>
+					</div>
+				</td>
+			</tr>
+		</table>
+	</div>
+</div>
+</div>
+</section>
+
+<script src="tvshows.js"></script>
+	
+
+</body>
+</html>
